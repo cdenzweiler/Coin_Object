@@ -8,24 +8,29 @@ let coin = {
     },
 
     toString: function () {
+        //Code borrowed from: https://developer.mozilla.org/en-US/docs/Web/API/Document/createElement
+        const newDiv = document.createElement("div");
+        const currentDiv = document.getElementById("div1");
         coin.flip()
         if (coin.state == 0) {
-            document.body.createElement()
-           document.body.innerHTML = "<h1>Heads</h1>"
+            newContent = document.createTextNode("Heads!")
         } else {
-            document.body.innerHTML = "<h2>Tails</h2>"
+            newContent = document.createTextNode("Tails!")
         }
+        newDiv.appendChild(newContent)
+        document.body.insertBefore(newDiv, currentDiv)
         return coin.state
     },
 
     toHTML: function () {
-        let image = document.createElement("img"); 
+        let image = document.createElement("img");
+        // document.body.appendChild(image)
         coin.flip()
-        if(coin.state == 0) {
-            image.src="./images/coin_heads.jpg"
+        if (coin.state == 0) {
+            image.src = "./images/coin_heads.jpg"
             document.body.appendChild(image)
         } else {
-            image.src="./images/coin_tails.jpg"
+            image.src = "./images/coin_tails.jpg"
             document.body.appendChild(image)
         }
         return image
@@ -34,19 +39,17 @@ let coin = {
 
 
 function display20Flips() {
-    for (i=0;i<20;i++) {
-        coin.flip();
+    for (i = 0; i < 20; i++) {
         coin.toString()
         /*- display the result of each flip as a string on the page (make use of your toString() method)
         */
-
     }
     return i
 }
 
 function display20Images() {
 
-    for(i=0;i<20;i++) {
+    for (i = 0; i < 20; i++) {
         coin.flip()
         coin.toHTML()
 
